@@ -1,5 +1,10 @@
 var Netflix = require('../dist/netflix');
 
-var n = new Netflix();
+var n = new Netflix({
+  email: '',
+  password: ''
+});
 
-n.catalog()
+n.catalog(function(){
+  console.log('We are in!')
+});
