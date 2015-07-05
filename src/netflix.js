@@ -19,8 +19,15 @@ export default class Netflix {
     this._login(function(){
       req.get(baseUrl, (err, response, body) => {
         let $ = cheerio.load(body);
-        //console.log($('.slider-item').length);
-
+        let elements = $('.slider-item');
+        for (var i = 0; i < elements.length; i++) {
+          let data_id = $(elements[i]).data('reactid');
+          let id = data_id.split('title')[1].split('_')[1]
+          req.get(`${baseUrl}/?jbv=${id}&jbp=${i}&jbr=1`, (err, response, body) => {
+            let $$ = cheerio.load(body);
+            console.log($$('.title').text());
+          })
+        }
 
         return cb();
       });
